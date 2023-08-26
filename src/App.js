@@ -1,11 +1,11 @@
 import { Component } from 'react'
 
-import logo from './logo.svg'
+import CardList from './components/cardlist/CardList.component'
 import './App.css'
 
 class App extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       monsters: [],
@@ -17,14 +17,9 @@ class App extends Component {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(res => res.json())
       .then(users =>
-        this.setState(
-          () => {
-            return { monsters: users }
-          },
-          () => {
-            console.log(this.state)
-          }
-        )
+        this.setState(() => {
+          return { monsters: users }
+        })
       )
   }
 
@@ -54,11 +49,14 @@ class App extends Component {
           placeholder='search monsters'
           onChange={onSearchChange}
         />
+        {/*
         {filteredMonsters.map((monster, i) => (
           <div key={monster.id}>
             <h1>{monster.name}</h1>
           </div>
         ))}
+        */}
+        <CardList monsters={filteredMonsters} />
       </div>
     )
   }
